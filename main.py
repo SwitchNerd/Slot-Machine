@@ -7,14 +7,18 @@ import random
 import sys, time
 
 m_lines = 3
+m_rows = [1,2,3,4]
 
 def main():
     account_balance = 3000
     
-    if input("Would you like to see current balance? ") == 'y':
-        print(f'${account_balance}')
-        
     while True:
+        
+        if input("Would you like to see current balance? ") == 'y':
+            print(f'${account_balance}')
+        
+        if account_balance == 0:
+            break
         
         bettings = bet(account_balance)
         account_balance = account_balance - bettings
@@ -33,7 +37,9 @@ def main():
         print('')
         print('')
         
-        has_won()
+        winnings = has_won(lines,bettings)
+        print(f'You have won {winnings}!')
+        
     
         
 def bet(a_b): 
@@ -68,6 +74,13 @@ def no_lines():
     return lines
 
 def has_won(line, bets):
-    pass 
+    i = 0
+    for _ in range (line):
+        if random.choice(m_rows) != 1:
+            i = 1
+    if i == 0:
+        return bets * line
+    else: 
+        return 0
 
 main()
